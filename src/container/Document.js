@@ -38,6 +38,7 @@ export default class Document extends PureComponent {
 
   render() {
     const { body } = this.state;
+
     return (
       <>
       <Form />
