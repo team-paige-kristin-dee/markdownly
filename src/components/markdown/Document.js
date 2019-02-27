@@ -3,8 +3,8 @@ import Preview from './Preview';
 import Editor from './Editor';
 import styles from './Document.css';
 import store from '../../store';
-import { getAllMarkdowns } from '../../selectors/markdownSelectors';
-import { updateNewMarkdown } from '../../actions/markdownActions';
+import { getMarkdown } from '../../selectors/markdownSelectors';
+import { updateMarkdown } from '../../actions/markdownActions';
 
 export default class Document extends PureComponent {
   state = {
@@ -13,12 +13,12 @@ export default class Document extends PureComponent {
   };
 
   updateMarkdown = ({ target }) => {
-    store.dispatch(updateNewMarkdown(target.value));
+    store.dispatch(updateMarkdown(target.value));
   };
 
   updateState = () => {
     const currentReduxState = store.getState();
-    const markdown = getAllMarkdowns(currentReduxState);
+    const markdown = getMarkdown(currentReduxState);
     this.setState({ markdown });
   };
 

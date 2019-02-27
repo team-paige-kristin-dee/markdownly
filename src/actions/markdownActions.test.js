@@ -6,7 +6,7 @@ describe('markdown action creators', () => {
 
     expect(action).toEqual({
       type: UPDATE_MARKDOWN,
-      payload: { markdown: '# banana' }
+      payload: '# banana' 
     });
   });
 });
