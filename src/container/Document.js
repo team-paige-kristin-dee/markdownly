@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import Preview from './Preview';
-import Editor from './Editor';
+import Preview from '../components/markdown/Preview';
+import Editor from '../components/markdown/Editor';
 import styles from './Document.css';
-import store from '../../store';
-import { getMarkdown } from '../../selectors/markdownSelectors';
-import { updateMarkdown } from '../../actions/markdownActions';
+import store from '../store';
+import { getMarkdown } from '../selectors/markdownSelectors';
+import { updateMarkdown } from '../actions/markdownActions';
 
 export default class Document extends PureComponent {
   state = {
