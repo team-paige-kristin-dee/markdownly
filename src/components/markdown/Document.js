@@ -13,14 +13,12 @@ export default class Document extends PureComponent {
   };
 
   updateMarkdown = ({ target }) => {
-    console.log(target.value);
     store.dispatch(updateNewMarkdown(target.value));
   };
 
   updateState = () => {
     const currentReduxState = store.getState();
     const markdown = getAllMarkdowns(currentReduxState);
-    console.log('markdown', markdown);
     this.setState({ markdown });
   };
 

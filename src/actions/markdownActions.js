@@ -9,5 +9,5 @@ export const NEW_MARKDOWN_UPDATE = 'NEW_MARKDOWN_UPDATE';
 
 export const updateNewMarkdown = markdown => ({
   type: NEW_MARKDOWN_UPDATE,
-  payload: markdown 
+  payload: { markdown }
 });

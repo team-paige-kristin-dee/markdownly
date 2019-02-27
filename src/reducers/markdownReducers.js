@@ -12,7 +12,7 @@ export default function reducer(state = initialState, action) {
       };
     case NEW_MARKDOWN_UPDATE: 
       return {
-        markdown: action.payload
+        markdown: action.payload.markdown
       };
     default:
       return state;
