@@ -16,4 +16,20 @@ describe('markdown reducer', () => {
       body: ''
     });
   });
+
+  it('handles the update markdown body action', () => {
+    const state = {
+      title: '',
+      body: ''
+    };
+    const updatedMarkdown = reducer(state, {
+      type: 'UPDATE_MARKDOWN_BODY',
+      payload: 'newbody'
+    });
+
+    expect(updatedMarkdown).toEqual({
+      title: '', 
+      body: 'newbody'
+    });
+  });
 });

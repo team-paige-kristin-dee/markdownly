@@ -1,4 +1,4 @@
-import { UPDATE_MARKDOWN_TITLE } from '../actions/markdownActions';
+import { UPDATE_MARKDOWN_TITLE, UPDATE_MARKDOWN_BODY } from '../actions/markdownActions';
 
 const initialState = {
   title: '', 
@@ -11,6 +11,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         title: action.payload
+      };
+    case UPDATE_MARKDOWN_BODY:
+      return {
+        ...state,
+        body: action.payload
       };
     default:
       return state;
