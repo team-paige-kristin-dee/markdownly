@@ -1,17 +1,35 @@
 import reducer from './markdownReducers';
 
 describe('markdown reducer', () => {
-  it('handles the update markdown action', () => {
+  it('handles the update markdown title action', () => {
     const state = {
-      markdown: ''
+      title: '',
+      body: ''
     };
     const updatedMarkdown = reducer(state, {
-      type: 'UPDATE_MARKDOWN',
+      type: 'UPDATE_MARKDOWN_TITLE',
       payload: '# new text'
     });
 
     expect(updatedMarkdown).toEqual({
-      markdown: '# new text'
+      title: '# new text', 
+      body: ''
+    });
+  });
+
+  it('handles the update markdown body action', () => {
+    const state = {
+      title: '',
+      body: ''
+    };
+    const updatedMarkdown = reducer(state, {
+      type: 'UPDATE_MARKDOWN_BODY',
+      payload: 'newbody'
+    });
+
+    expect(updatedMarkdown).toEqual({
+      title: '', 
+      body: 'newbody'
     });
   });
 });

@@ -3,46 +3,48 @@ import Preview from '../components/markdown/Preview';
 import Editor from '../components/markdown/Editor';
 import styles from './Document.css';
 import store from '../store';
-import { getMarkdown } from '../selectors/markdownSelectors';
-import { updateMarkdown } from '../actions/markdownActions';
+import { getMarkdownTitle, getMarkdownBody } from '../selectors/markdownCreate';
+import { updateMarkdownTitle, updateMarkdownBody } from '../actions/markdownActions';
 import Form from '../components/markdown/Form';
 
 export default class Document extends PureComponent {
   state = {
-    markdown: '',
-    unsubscribe: null
+    title: '',
+    body: ''
   };
 
   updateMarkdown = ({ target }) => {
-    store.dispatch(updateMarkdown(target.value));
-  };
-
-  updateState = () => {
-    const currentReduxState = store.getState();
-    const markdown = getMarkdown(currentReduxState);
-    this.setState({ markdown });
+    const factoryMethod = {
+      title: updateMarkdownTitle,
+      body: updateMarkdownBody
+    };
+    store.dispatch(factoryMethod[target.name](target.value));
   };
 
   componentDidMount() {
-    this.updateState();
-    const unsubscribe = store.subscribe(() => {
-      this.updateState();
+    this.unsubscribe = store.subscribe(() => {
+      const state = store.getState();
+      const title = getMarkdownTitle(state);
+      const body = getMarkdownBody(state);
+      this.setState({ title, body });
     });
-    this.setState({ unsubscribe });
   }
 
   componentWillUnmount() {
-    this.state.unsubscribe();
+    if(this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   render() {
-    const { markdown } = this.state;
+    const { body } = this.state;
+
     return (
       <>
       <Form />
       <div className={styles.Document}>
-        <Editor markdown={markdown} updateMarkdown={this.updateMarkdown} />
-        <Preview markdown={markdown} />
+        <Editor body={body} updateMarkdown={this.updateMarkdown} />
+        <Preview body={body} />
       </div>
       </>
     );
