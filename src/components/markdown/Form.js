@@ -1,8 +1,11 @@
 import React from 'react';
 
-function Form () {
+function Form() {
   return (
-    <input type="text" name="title" >Title</input>
+    <form>
+      Title: <input type="text" name="title" />
+      <button>Add Markdown</button>
+    </form>
   );
 }
  
