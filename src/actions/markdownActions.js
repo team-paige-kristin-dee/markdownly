@@ -1,5 +1,5 @@
-export const UPDATE_MARKDOWN = 'UPDATE_MARKDOWN';
-export const updateMarkdown = markdown => ({
-  type: UPDATE_MARKDOWN,
-  payload: markdown 
+export const UPDATE_MARKDOWN_TITLE = 'UPDATE_MARKDOWN_TITLE';
+export const updateMarkdownTitle = title => ({
+  type: UPDATE_MARKDOWN_TITLE,
+  payload: title 
 });

@@ -1,14 +1,16 @@
-import { UPDATE_MARKDOWN } from '../actions/markdownActions';
+import { UPDATE_MARKDOWN_TITLE } from '../actions/markdownActions';
 
 const initialState = {
-  markdown: ''
+  title: '', 
+  body: '' 
 };
 
 export default function reducer(state = initialState, action) {
   switch(action.type) {
-    case UPDATE_MARKDOWN: 
+    case UPDATE_MARKDOWN_TITLE: 
       return {
-        markdown: action.payload
+        ...state,
+        title: action.payload
       };
     default:
       return state;
