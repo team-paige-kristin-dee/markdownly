@@ -3,36 +3,43 @@ import Preview from '../components/markdown/Preview';
 import Editor from '../components/markdown/Editor';
 import styles from './Document.css';
 import store from '../store';
-import { getMarkdown } from '../selectors/markdownSelectors';
-import { updateMarkdown } from '../actions/markdownActions';
+import { getMarkdown } from '../selectors/markdownCreate';
+import { updateMarkdownTitle, updateMarkdownBody } from '../actions/markdownActions';
 import Form from '../components/markdown/Form';
 
 export default class Document extends PureComponent {
   state = {
-    markdown: '',
-    unsubscribe: null
+    title: '',
+    body: ''
   };
 
   updateMarkdown = ({ target }) => {
-    store.dispatch(updateMarkdown(target.value));
+    const factoryMethod = {
+      title: updateMarkdownTitle,
+      body: updateMarkdownBody
+    };
+    store.dispatch(factoryMethod[target.name](target.value));
   };
 
   updateState = () => {
     const currentReduxState = store.getState();
-    const markdown = getMarkdown(currentReduxState);
-    this.setState({ markdown });
+    const { title, body } = getMarkdown(currentReduxState);
+    this.setState({ title, body });
   };
 
   componentDidMount() {
-    this.updateState();
-    const unsubscribe = store.subscribe(() => {
-      this.updateState();
+    this.unsubscribe = store.subscribe(() => {
+      const title = 
+      const body = 
+      const state = store.getState();
+      this.setState({ title, body });
     });
-    this.setState({ unsubscribe });
   }
 
   componentWillUnmount() {
-    this.state.unsubscribe();
+    if(this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   render() {
