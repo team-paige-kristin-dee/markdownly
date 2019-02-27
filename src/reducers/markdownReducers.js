@@ -1,18 +1,20 @@
-import { CREATE_MARKDOWN } from '../actions/markdownActions';
+import { CREATE_MARKDOWN, NEW_MARKDOWN_UPDATE } from '../actions/markdownActions';
 
 const initialState = {
-  markdowns: []
+  markdown: ''
 };
 
 export default function reducer(state = initialState, action) {
   switch(action.type) {
     case CREATE_MARKDOWN:
       return {
-        markdowns: [
-          ...state.markdowns,
-          { ...action.payload }
-        ]
+        markdown: action.payload.markdown
       };
+    case NEW_MARKDOWN_UPDATE: 
+      return {
+        markdown: action.payload
+      };
+    default:
+      return state;
   }
-  return state;
 }
