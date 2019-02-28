@@ -5,10 +5,14 @@ import Editor from './Editor';
 import Markdowns from './Markdowns';
 import Form from './Form';
 import styles from './Document.css';
+import { Link } from 'react-router-dom';
 
 export default function DocumentView({ title, body, markdowns, onChange, onSubmit }) {
   return (
     <>
+      <nav>
+        <Link to="/">Home</Link>
+      </nav>
       <Form title={title} onChange={onChange} onSubmit={onSubmit.bind(null, title, body)} />
       <Markdowns markdowns={markdowns} />
       <div className={styles.Document}>
