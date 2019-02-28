@@ -4,11 +4,6 @@ export const getMarkdowns = state => {
 
 export const getSelectedMarkdown = (state, title) => {
   const selectedMarkdown = state.markdowns.markdowns.find(markdown => markdown.title === title);
-  if(selectedMarkdown) {
-    return selectedMarkdown.body;
-  }
-  else {
-    return null;
-  }
+  return selectedMarkdown ? selectedMarkdown.body : null;
 };
 
