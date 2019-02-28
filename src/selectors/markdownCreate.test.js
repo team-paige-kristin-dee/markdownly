@@ -3,8 +3,10 @@ import { getMarkdownTitle, getMarkdownBody } from './markdownCreate';
 describe('markdown selectors', () => {
   it('selects a markdown title', () => {
     const state = {
-      title: '#SPOT',
-      body: ''
+      markdownReducers: 
+      { title: '#SPOT',
+        body: '' },
+      markdowns: []
     };
 
     const selectedMarkdown = getMarkdownTitle(state);
@@ -13,10 +15,12 @@ describe('markdown selectors', () => {
 
   it('selects a markdown body', () => {
     const state = {
-      title: '',
-      body: 'Spot is the greatest dog ever'
+      markdownReducers: 
+      { title: '',
+        body: 'Spot is the greatest dog ever' },
+      markdowns: []
     };
-
+      
     const selectedMarkdown = getMarkdownBody(state);
     expect(selectedMarkdown).toEqual('Spot is the greatest dog ever');
   });

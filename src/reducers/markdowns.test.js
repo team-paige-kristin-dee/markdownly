@@ -10,9 +10,9 @@ describe('markdowns reducer', () => {
       payload: { title: 'title', body: 'this is a body' }
     });
 
-    expect(updatedMarkdowns).toEqual([
+    expect(updatedMarkdowns).toEqual({ markdowns:[
       { title: 'title', body: 'this is a body' }
-    ]);
+    ] });
   });
 });
 
