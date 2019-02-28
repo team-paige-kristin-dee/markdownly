@@ -1,68 +1,30 @@
-import React, { PureComponent } from 'react';
-import Preview from '../components/markdown/Preview';
-import Editor from '../components/markdown/Editor';
-import Markdowns from '../components/markdown/Markdowns';
-import styles from './Document.css';
-import store from '../store';
+import { connect } from 'react-redux';
 import { getMarkdownTitle, getMarkdownBody } from '../selectors/markdownCreate';
 import { getMarkdowns } from '../selectors/markdowns';
 import { updateMarkdownTitle, updateMarkdownBody, createMarkdown } from '../actions/markdownActions';
-import Form from '../components/markdown/Form';
+import DocumentView from '../components/markdown/DocumentView';
 
-export default class Document extends PureComponent {
-  state = {
-    title: '',
-    body: '',
-    markdowns: []
-  };
+const mapStateToProps = state => ({
+  title: getMarkdownTitle(state),
+  body: getMarkdownBody(state),
+  markdowns: getMarkdowns(state)
+});
 
-  addMarkdown = markdown => {
-    this.setState(state => ({
-      markdowns: [...state.markdowns, markdown]
-    }));
-  };
-
-  handleChange = ({ target }) => {
+const mapDispatchToProps = dispatch => ({
+  onChange({ target }) {
     const factoryMethod = {
       title: updateMarkdownTitle,
       body: updateMarkdownBody
     };
-    store.dispatch(factoryMethod[target.name](target.value));
-  };
-
-  handleSubmit = event => {
+    dispatch(factoryMethod[target.name](target.value));
+  },
+  onSubmit(title, body, event) {
     event.preventDefault();
-    const { title, body } = this.state;
-    store.dispatch(createMarkdown({ title, body }));
-  };
-
-  componentDidMount() {
-    this.unsubscribe = store.subscribe(() => {
-      const state = store.getState();
-      const title = getMarkdownTitle(state);
-      const body = getMarkdownBody(state);
-      const markdowns = getMarkdowns(state);
-      this.setState({ title, body, markdowns });
-    });
+    dispatch(createMarkdown({ title, body }));
   }
+});
 
-  componentWillUnmount() {
-    if(this.unsubscribe) {
-      this.unsubscribe();
-    }
-  }
-
-  render() {
-    const { title, body, markdowns } = this.state;
-    return (
-      <>
-      <Form title={title} onChange={this.handleChange} onSubmit={this.handleSubmit} />
-      <Markdowns markdowns={markdowns} />
-      <div className={styles.Document}>
-        <Editor body={body} updateMarkdown={this.handleChange} />
-        <Preview body={body} />
-      </div>
-      </>
-    );
-  }
-}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DocumentView);
