@@ -1,8 +1,8 @@
 export const getMarkdownTitle = state => {
-  return state.title;
+  return state.markdownReducers.title;
 };
 
 export const getMarkdownBody = state => {
-  return state.body;
+  return state.markdownReducers.body;
 };
 
