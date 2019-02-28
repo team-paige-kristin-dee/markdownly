@@ -1,3 +1,19 @@
 .Document {
   display: flex
 }
+
+.header {
+  padding: 20px;
+  font-family: 'Roboto Mono', monospace;
+  nav {
+    padding: 10px;
+    font-size: 1.5em;
+    float: right;
+    :link {
+      text-decoration: none;
+    }
+  }
+  button {
+    margin-left: 10px;
+  }
+}

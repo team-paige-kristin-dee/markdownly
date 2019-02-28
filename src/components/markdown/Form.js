@@ -9,7 +9,7 @@ function Form({
   return (
     <form onSubmit={onSubmit}>
       Title: <input type="text" name="title" value={title} onChange={onChange} required />
-      <button>Add Markdown</button>
+      <button>Add</button>
     </form>
   );
 }

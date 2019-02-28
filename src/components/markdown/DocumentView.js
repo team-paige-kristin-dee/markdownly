@@ -10,10 +10,13 @@ import { Link } from 'react-router-dom';
 export default function DocumentView({ title, body, markdowns, onChange, onSubmit }) {
   return (
     <>
+    <div className={styles.header}>
       <nav>
         <Link to="/">Home</Link>
       </nav>
+      <h2>ADD A MARKDOWN</h2>
       <Form title={title} onChange={onChange} onSubmit={onSubmit.bind(null, title, body)} />
+    </div>
       <Markdowns markdowns={markdowns} />
       <div className={styles.Document}>
         <Editor body={body} updateMarkdown={onChange} />
