@@ -6,11 +6,11 @@ import Markdowns from './Markdowns';
 import Form from './Form';
 import styles from './Document.css';
 
-export default function DocumentView({ title, body, markdowns, onChange, onSubmit }) {
+export default function DocumentView({ title, body, markdowns, onChange, onSubmit, handleClick }) {
   return (
     <>
       <Form title={title} onChange={onChange} onSubmit={onSubmit.bind(null, title, body)} />
-      <Markdowns markdowns={markdowns} />
+      <Markdowns markdowns={markdowns} handleClick={handleClick} />
       <div className={styles.Document}>
         <Editor body={body} updateMarkdown={onChange} />
         <Preview body={body} />
@@ -23,5 +23,6 @@ DocumentView.propTypes = {
   body: PropTypes.string.isRequired,
   markdowns: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired
 };

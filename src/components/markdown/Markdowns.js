@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import Markdown from './Markdown';
 
 function Markdowns({
-  markdowns
+  markdowns,
+  handleClick
 }) {
   const listOfMarkdowns = markdowns.map((markdown, i) => {
     return (
-      <li key={i}><Markdown title={markdown.title} /></li>
+      <li key={i}><Markdown title={markdown.title} handleClick={handleClick} /></li>
     );
   });
 
@@ -19,7 +20,8 @@ function Markdowns({
 }
 
 Markdowns.propTypes = {
-  markdowns: PropTypes.array.isRequired
+  markdowns: PropTypes.array.isRequired,
+  handleClick: PropTypes.func.isRequired
 };
 
 export default Markdowns;

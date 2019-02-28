@@ -21,6 +21,9 @@ const mapDispatchToProps = dispatch => ({
   onSubmit(title, body, event) {
     event.preventDefault();
     dispatch(createMarkdown({ title, body }));
+  },
+  handleClick() {
+    console.log('click');
   }
 });
 
