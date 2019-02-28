@@ -3,7 +3,8 @@ import { getMarkdowns } from './markdowns';
 describe('markdown selectors', () => {
   it('selects an array of markdowns', () => {
     const state = {
-      markdowns: [{ title: '# banana', body: 'yolo 420' }, { title: '## banana', body: 'nananana' }]
+      markdowns: [{ title: '# banana', body: 'yolo 420' }, { title: '## banana', body: 'nananana' }],
+      markdownReducers: { title: '', body: '' }
     };
 
     const selectedMarkdowns = getMarkdowns(state);
