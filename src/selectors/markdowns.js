@@ -1,1 +1,1 @@
-export const getMarkdowns = state => state.markdowns;
+export const getMarkdowns = state => state.markdowns.markdowns;
