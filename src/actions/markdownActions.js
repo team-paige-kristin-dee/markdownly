@@ -15,3 +15,9 @@ export const createMarkdown = markdown => ({
   type: CREATE_MARKDOWN,
   payload: markdown 
 });
+
+export const DELETE_MARKDOWN = 'DELETE_MARKDOWN';
+export const deleteMarkdown = markdown => ({
+  type: DELETE_MARKDOWN,
+  payload: markdown 
+});
