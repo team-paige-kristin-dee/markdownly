@@ -1,6 +1,7 @@
 import React from 'react';
-import connect from 'react-redux';
+import { connect } from 'react-redux';
 import Preview from '../components/markdown/Preview';
+import PropTypes from 'prop-types';
 import Editor from '../components/markdown/Editor';
 import Markdowns from '../components/markdown/Markdowns';
 import styles from './Document.css';
@@ -12,12 +13,12 @@ import Form from '../components/markdown/Form';
 function Document({ title, body, markdowns, onChange, onSubmit }) {
   return (
     <>
-    <Form title={title} onChange={onChange} onSubmit={onSubmit} />
-    <Markdowns markdowns={markdowns} />
-    <div className={styles.Document}>
-      <Editor body={body} updateMarkdown={onChange} />
-      <Preview body={body} />
-    </div>
+      <Form title={title} onChange={onChange} onSubmit={onSubmit.bind(null, title, body)} />
+      <Markdowns markdowns={markdowns} />
+      <div className={styles.Document}>
+        <Editor body={body} updateMarkdown={onChange} />
+        <Preview body={body} />
+      </div>
     </>
   );
 }
@@ -28,7 +29,7 @@ const mapStateToProps = state => ({
   markdowns: getMarkdowns(state)
 });
 
-const mapDispatchToProps = (dispatch, props) => ({
+const mapDispatchToProps = dispatch => ({
   onChange({ target }) {
     const factoryMethod = {
       title: updateMarkdownTitle,
@@ -36,12 +37,19 @@ const mapDispatchToProps = (dispatch, props) => ({
     };
     dispatch(factoryMethod[target.name](target.value));
   },
-  onSubmit(event) {
+  onSubmit(title, body, event) {
     event.preventDefault();
-    const { title, body } = props;
     dispatch(createMarkdown({ title, body }));
   }
 });
+
+Document.propTypes = {
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  markdowns: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired
+};
 
 export default connect(
   mapStateToProps,

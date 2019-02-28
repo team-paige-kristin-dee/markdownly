@@ -5,6 +5,7 @@ import Markdown from './Markdown';
 function Markdowns({
   markdowns
 }) {
+  console.log('list of markdowns', markdowns);
   const listOfMarkdowns = markdowns.map((markdown, i) => {
     return (
       <li key={i}><Markdown title={markdown.title} /></li>
