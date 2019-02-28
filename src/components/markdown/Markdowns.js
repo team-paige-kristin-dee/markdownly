@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Markdown from './Markdown';
 
 function Markdowns({
   markdowns
 }) {
   const listOfMarkdowns = markdowns.map((markdown, i) => {
     return (
-      <li key={i}>{markdown.title}</li>
+      <li key={i}><Markdown title={markdown.title} /></li>
     );
   });
 
