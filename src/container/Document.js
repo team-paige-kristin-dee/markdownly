@@ -22,7 +22,6 @@ export default class Document extends PureComponent {
   };
 
   handleChange = ({ target }) => {
-    console.log('target', target.value, target.name);
     const factoryMethod = {
       title: updateMarkdownTitle,
       body: updateMarkdownBody
@@ -48,6 +47,7 @@ export default class Document extends PureComponent {
 
   componentWillUnmount() {
     if(this.unsubscribe) {
+      console.log('component will unmount');
       this.unsubscribe();
     }
   }
