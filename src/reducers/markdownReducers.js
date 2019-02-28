@@ -24,7 +24,6 @@ export default function reducer(state = initialState, action) {
       };
     case LOAD_MARKDOWN:
       return {
-        ...state,
         body: action.payload
       };
     case CREATE_MARKDOWN:
