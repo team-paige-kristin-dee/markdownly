@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import Preview from '../components/markdown/Preview';
 import Editor from '../components/markdown/Editor';
+import Markdowns from '../components/markdown/Markdowns';
 import styles from './Document.css';
 import store from '../store';
 import { getMarkdownTitle, getMarkdownBody } from '../selectors/markdownCreate';
@@ -47,16 +48,16 @@ export default class Document extends PureComponent {
 
   componentWillUnmount() {
     if(this.unsubscribe) {
-      console.log('component will unmount');
       this.unsubscribe();
     }
   }
 
   render() {
-    const { title, body } = this.state;
+    const { title, body, markdowns } = this.state;
     return (
       <>
       <Form title={title} onChange={this.handleChange} onSubmit={this.handleSubmit} />
+      <Markdowns markdowns={markdowns} />
       <div className={styles.Document}>
         <Editor body={body} updateMarkdown={this.handleChange} />
         <Preview body={body} />
