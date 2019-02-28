@@ -1,68 +1,49 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
+import connect from 'react-redux';
 import Preview from '../components/markdown/Preview';
 import Editor from '../components/markdown/Editor';
 import Markdowns from '../components/markdown/Markdowns';
 import styles from './Document.css';
-import store from '../store';
 import { getMarkdownTitle, getMarkdownBody } from '../selectors/markdownCreate';
 import { getMarkdowns } from '../selectors/markdowns';
 import { updateMarkdownTitle, updateMarkdownBody, createMarkdown } from '../actions/markdownActions';
 import Form from '../components/markdown/Form';
 
-export default class Document extends PureComponent {
-  state = {
-    title: '',
-    body: '',
-    markdowns: []
-  };
+function Document({ title, body, markdowns, onChange, onSubmit }) {
+  return (
+    <>
+    <Form title={title} onChange={onChange} onSubmit={onSubmit} />
+    <Markdowns markdowns={markdowns} />
+    <div className={styles.Document}>
+      <Editor body={body} updateMarkdown={onChange} />
+      <Preview body={body} />
+    </div>
+    </>
+  );
+}
 
-  addMarkdown = markdown => {
-    this.setState(state => ({
-      markdowns: [...state.markdowns, markdown]
-    }));
-  };
+const mapStateToProps = state => ({
+  title: getMarkdownTitle(state),
+  body: getMarkdownBody(state),
+  markdowns: getMarkdowns(state)
+});
 
-  handleChange = ({ target }) => {
+const mapDispatchToProps = (dispatch, props) => ({
+  onChange({ target }) {
     const factoryMethod = {
       title: updateMarkdownTitle,
       body: updateMarkdownBody
     };
-    store.dispatch(factoryMethod[target.name](target.value));
-  };
-
-  handleSubmit = event => {
+    dispatch(factoryMethod[target.name](target.value));
+  },
+  onSubmit(event) {
     event.preventDefault();
-    const { title, body } = this.state;
-    store.dispatch(createMarkdown({ title, body }));
-  };
-
-  componentDidMount() {
-    this.unsubscribe = store.subscribe(() => {
-      const state = store.getState();
-      const title = getMarkdownTitle(state);
-      const body = getMarkdownBody(state);
-      const markdowns = getMarkdowns(state);
-      this.setState({ title, body, markdowns });
-    });
+    const { title, body } = props;
+    dispatch(createMarkdown({ title, body }));
   }
+});
 
-  componentWillUnmount() {
-    if(this.unsubscribe) {
-      this.unsubscribe();
-    }
-  }
-
-  render() {
-    const { title, body, markdowns } = this.state;
-    return (
-      <>
-      <Form title={title} onChange={this.handleChange} onSubmit={this.handleSubmit} />
-      <Markdowns markdowns={markdowns} />
-      <div className={styles.Document}>
-        <Editor body={body} updateMarkdown={this.handleChange} />
-        <Preview body={body} />
-      </div>
-      </>
-    );
-  }
-}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Document);
