@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { getMarkdownTitle, getMarkdownBody } from '../selectors/markdownCreate';
 import { getMarkdowns } from '../selectors/markdowns';
 import { updateMarkdownTitle, updateMarkdownBody, createMarkdown } from '../actions/markdownActions';
