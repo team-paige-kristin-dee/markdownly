@@ -7,7 +7,14 @@ import Form from './Form';
 import styles from './Document.css';
 import { Link } from 'react-router-dom';
 
-export default function DocumentView({ title, body, markdowns, onChange, onSubmit }) {
+export default function DocumentView({ 
+  selectedMarkdown,
+  title, 
+  body, 
+  markdowns, 
+  onChange, 
+  onSubmit
+}) {
   return (
     <>
     <div className={styles.header}>
@@ -19,7 +26,7 @@ export default function DocumentView({ title, body, markdowns, onChange, onSubmi
     </div>
       <Markdowns markdowns={markdowns} />
       <div className={styles.Document}>
-        <Editor body={body} updateMarkdown={onChange} />
+        <Editor body={selectedMarkdown} updateMarkdown={onChange} />
         <Preview body={body} />
       </div>
     </>
@@ -30,5 +37,6 @@ DocumentView.propTypes = {
   body: PropTypes.string.isRequired,
   markdowns: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  selectedMarkdown: PropTypes.object.isRequired
 };
