@@ -22,11 +22,13 @@ export default function DocumentView({
         <Link to="/">Home</Link>
       </nav>
       <h2>ADD A MARKDOWN</h2>
-      <Form title={title} onChange={onChange} onSubmit={onSubmit.bind(null, title, body)} />
+      {selectedMarkdown && <Link to="/markdown">Add new markdown</Link>}
+      {!selectedMarkdown && <Form title={title} onChange={onChange} onSubmit={onSubmit.bind(null, title, body)} />}
     </div>
       <Markdowns markdowns={markdowns} />
       <div className={styles.Document}>
-        <Editor body={selectedMarkdown} updateMarkdown={onChange} />
+        {selectedMarkdown && <Editor body={selectedMarkdown} updateMarkdown={onChange} />}
+        {!selectedMarkdown && <Editor body={body} updateMarkdown={onChange} />}
         <Preview body={body} />
       </div>
     </>
@@ -38,5 +40,5 @@ DocumentView.propTypes = {
   markdowns: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  selectedMarkdown: PropTypes.object.isRequired
+  selectedMarkdown: PropTypes.object
 };

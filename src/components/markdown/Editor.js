@@ -9,7 +9,7 @@ function Editor({ body, updateMarkdown }) {
 }
 
 Editor.propTypes = {
-  body: PropTypes.string.isRequired,
+  body: PropTypes.object.isRequired,
   updateMarkdown: PropTypes.func.isRequired
 };
 

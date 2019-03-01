@@ -8,8 +8,7 @@ import PropTypes from 'prop-types';
 
 class Document extends React.PureComponent {
   static propTypes = {
-    loadMarkdown: PropTypes.func.isRequired,
-    selectedMarkdown: PropTypes.object.isRequired,
+    selectedMarkdown: PropTypes.object,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     markdowns: PropTypes.array.isRequired,
