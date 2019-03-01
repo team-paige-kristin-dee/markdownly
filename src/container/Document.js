@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 class Document extends React.PureComponent {
   static propTypes = {
-    selectedMarkdown: PropTypes.object,
+    selectedMarkdown: PropTypes.string,
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     markdowns: PropTypes.array.isRequired,
@@ -49,8 +49,13 @@ const mapDispatchToProps = dispatch => ({
     };
     dispatch(factoryMethod[target.name](target.value));
   },
-  onSubmit(title, body, event) {
+  onSubmit(title, body, markdowns, event) {
     event.preventDefault();
+    markdowns.map(markdown => {
+      if(markdown.title === title) {
+        return alert('Must be a unique title!');
+      }
+    });
     dispatch(createMarkdown({ title, body }));
   }
 });

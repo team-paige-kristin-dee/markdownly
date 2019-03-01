@@ -23,7 +23,7 @@ export default function DocumentView({
       </nav>
       <h2>ADD A MARKDOWN</h2>
       {selectedMarkdown && <Link to="/markdown">Add new markdown</Link>}
-      {!selectedMarkdown && <Form title={title} onChange={onChange} onSubmit={onSubmit.bind(null, title, body)} />}
+      {!selectedMarkdown && <Form title={title} onChange={onChange} onSubmit={onSubmit.bind(null, title, body, markdowns)} />}
     </div>
       <Markdowns markdowns={markdowns} />
       <div className={styles.Document}>
@@ -40,5 +40,5 @@ DocumentView.propTypes = {
   markdowns: PropTypes.array.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  selectedMarkdown: PropTypes.object
+  selectedMarkdown: PropTypes.string
 };

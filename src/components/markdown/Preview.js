@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import marked from 'marked';
 import styles from 'github-markdown-css/github-markdown.css';
+import './Preview.css';
 
 function Preview({ body }) {
   const __html = marked(body);
