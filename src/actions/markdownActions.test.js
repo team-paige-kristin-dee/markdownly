@@ -4,7 +4,9 @@ import {
   updateMarkdownBody,
   UPDATE_MARKDOWN_BODY,
   createMarkdown,
-  CREATE_MARKDOWN
+  CREATE_MARKDOWN,
+  loadMarkdown,
+  LOAD_MARKDOWN
 } from './markdownActions';
 
 describe('markdown action creators', () => {
@@ -31,6 +33,15 @@ describe('markdown action creators', () => {
 
     expect(action).toEqual({
       type: CREATE_MARKDOWN,
+      payload: { title: 'title', body: 'this is a body' }
+    });
+  });
+
+  it('can load a markdown', () => {
+    const action = loadMarkdown({ title: 'title', body: 'this is a body' });
+
+    expect(action).toEqual({
+      type: LOAD_MARKDOWN,
       payload: { title: 'title', body: 'this is a body' }
     });
   });

@@ -1,4 +1,9 @@
-import { UPDATE_MARKDOWN_TITLE, UPDATE_MARKDOWN_BODY, CREATE_MARKDOWN } from '../actions/markdownActions';
+import { 
+  UPDATE_MARKDOWN_TITLE, 
+  UPDATE_MARKDOWN_BODY, 
+  CREATE_MARKDOWN, 
+  LOAD_MARKDOWN 
+} from '../actions/markdownActions';
 
 const initialState = {
   title: '', 
@@ -15,6 +20,10 @@ export default function reducer(state = initialState, action) {
     case UPDATE_MARKDOWN_BODY:
       return {
         ...state,
+        body: action.payload
+      };
+    case LOAD_MARKDOWN:
+      return {
         body: action.payload
       };
     case CREATE_MARKDOWN:

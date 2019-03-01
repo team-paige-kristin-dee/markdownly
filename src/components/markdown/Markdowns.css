@@ -1,0 +1,17 @@
+li {
+  list-style: none;
+  font-family: 'Roboto Mono', monospace;
+  border: 1px solid black;
+  width: 25%;
+  text-align: center;
+  margin: 10px;
+  :link {
+    text-decoration: none; 
+  }
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

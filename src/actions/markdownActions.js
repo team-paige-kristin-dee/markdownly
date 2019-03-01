@@ -15,3 +15,9 @@ export const createMarkdown = markdown => ({
   type: CREATE_MARKDOWN,
   payload: markdown 
 });
+
+export const LOAD_MARKDOWN = 'LOAD_MARKDOWN';
+export const loadMarkdown = markdown => ({
+  type: LOAD_MARKDOWN,
+  payload: markdown 
+});

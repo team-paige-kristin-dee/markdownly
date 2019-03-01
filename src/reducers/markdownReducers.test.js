@@ -32,4 +32,19 @@ describe('markdown reducer', () => {
       body: 'newbody'
     });
   });
+
+  it('handles the load markdown action', () => {
+    const state = {
+      title: '',
+      body: ''
+    };
+    const loadedMarkdown = reducer(state, {
+      type: 'LOAD_MARKDOWN',
+      payload: 'body'
+    });
+
+    expect(loadedMarkdown).toEqual({
+      body: 'body'
+    });
+  });
 });
